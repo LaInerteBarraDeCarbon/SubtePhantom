@@ -73,22 +73,17 @@ public class SistemaDeposito extends EjercicioOIA {
 	 * cuantos litros rebasan. <br>
 	 */
 	public void resolver() {
-		if (this.volumenTotalSistema - this.volumenTotal > 0) {
+		if (this.volumenTotalSistema - this.volumenTotal >= 0) {
 			int sumaSuperficies = 0;
 			int volumenActual = 0;
 			while (this.volumenTotal > volumenActual) {
-				// this.volumenTotal -= (this.depositos[i].getProfundidad() -
-				// this.depositos[i+1].getProfundidad()) *
-				// this.depositos[i].getSuperficie()
 				sumaSuperficies += this.depositos[this.cantidadUtilizados].getSuperficie();
 				volumenActual += sumaSuperficies * this.diferenciaProfundidad[this.cantidadUtilizados];
 				this.cantidadUtilizados++;
 			}
-			if (volumenActual > this.volumenTotal && this.cantidadDepositos >= this.cantidadUtilizados) {
-				this.cantidadUtilizados--;
-			}
-			this.distanciaSueloFluido = ((volumenActual - this.volumenTotal) / sumaSuperficies)
-					/ this.cantidadUtilizados;
+			this.distanciaSueloFluido = this.depositos[0].getProfundidad()
+					- ((((volumenActual - this.volumenTotal) / sumaSuperficies) / this.cantidadUtilizados)
+							+ ((this.volumenTotal / sumaSuperficies) / this.cantidadUtilizados));
 		} else {
 			this.cantidadDesbordada = this.volumenTotal - this.volumenTotalSistema;
 		}
@@ -145,7 +140,7 @@ public class SistemaDeposito extends EjercicioOIA {
 		PrintWriter salida;
 		try {
 			salida = new PrintWriter(new FileWriter(super.salida));
-			if (this.volumenTotalSistema - this.volumenTotal > 0) {
+			if (this.volumenTotalSistema - this.volumenTotal >= 0) {
 				salida.println(this.cantidadUtilizados);
 				salida.println(this.distanciaSueloFluido);
 			} else
@@ -161,12 +156,12 @@ public class SistemaDeposito extends EjercicioOIA {
 		try {
 			salida = new PrintWriter(new FileWriter(path));
 			int volumen = 1000000;
-			int profundidad = 200;
-			int superficie = 400;
-			int cantidad = 500;
+			int profundidad = 400;
+			int superficie = 200;
+			int cantidad = 199;
 			salida.println(cantidad);
 			for (int i = 0; i < cantidad; i++) {
-				salida.println(profundidad + " " + superficie);
+				salida.println((profundidad - i) + " " + (superficie - i));
 			}
 			salida.print(volumen);
 			salida.close();
