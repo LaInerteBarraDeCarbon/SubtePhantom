@@ -6,7 +6,6 @@ package subterraneo;
 public class Deposito {
 	private int profundidad;
 	private int superficie;
-	// private int volumenHastaSiguiente;
 
 	/**
 	 * Crea un depósito con su profundidad y su superficie. <br>
@@ -47,16 +46,5 @@ public class Deposito {
 	public int getVolumen() {
 		return this.superficie * this.profundidad;
 	}
-
-	/*
-	 * /** Devuelve el volumen de más que tiene un depósito respecto del
-	 * siguiente. <br>
-	 * 
-	 * @param profundidad2
-	 * 
-	 * @return Volumen de más del depósito respecto del siguiente. <br>
-	 * 
-	 * public int getVolumenHastaSiguiene(int profundidad2) { return
-	 * (this.profundidad - profundidad2) * this.superficie; }
-	 */
+	
 }
